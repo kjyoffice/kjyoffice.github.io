@@ -8,7 +8,7 @@
 	        <!-- https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
 	        <meta name="apple-mobile-web-app-title" content="kjyoffice-github-io" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="default" /> <!-- default, black, black-translucent -->
 	        <!-- Apple -->		
 		
 		<title> kjyoffice.github.io </title>
@@ -21,12 +21,28 @@
 	        <link rel="apple-touch-icon" sizes="167x167" href="touch-icon-ipad-retina.png" />
 	        <link rel="apple-touch-startup-image" href="/launch.png" />
 	        -->
-	        <!-- Apple -->		
+	        <!-- Apple -->
+
+	        <style type="text/css">
+	        #maintitle {
+	            position:absolute; 
+	            left:50%; 
+	            top:50%; 
+	            transform:translate(-50%, -50%); 
+	            display:flex; 
+	            justify-content:center; 
+	            align-items:center; 
+	            font-size:3rem;
+	            font-weight:bold;
+	            text-align:center;
+	            line-height:200%;
+	        }
+	        </style>		
 	</head>
 	<body>
-		<div>
-			<div>kjyoffice.github.io</div>
-			<div>Hello :-)</div>
-		</div>
+	        <div id="maintitle">
+			kjyoffice.github.io<br />
+			Hello~ 😊
+	        </div>
 	</body>
 </html>
