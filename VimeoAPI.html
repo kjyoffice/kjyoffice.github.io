@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VimeoAPI</title>
+</head>
+<body>
+    <h1>VimeoAPI</h1>
+
+    <!--
+    https://developer.vimeo.com/player/sdk/basics
+    https://developer.vimeo.com/player/sdk/reference
+    https://developer.vimeo.com/player/sdk/embed
+    -->
+    <div id="myVideo" data-vimeo-id="76979871" data-vimeo-autoplay="false" data-vimeo-loop="true" data-vimeo-width="800"></div>
+    <!-- <div id="{name}" data-vimeo-id="{video_id}"></div> -->
+    <!-- <div id="{name}" data-vimeo-url="{video_url}"></div> -->
+
+    <script type="text/javascript" src="https://player.vimeo.com/api/player.js"></script>
+    <script type="text/javascript">
+        /*
+        var options = {
+            url: "https://player.vimeo.com/video/76979871?h=8272103f6e",
+            width: 800
+        };
+
+        var videoPlayer = new Vimeo.Player('myVideo', options);
+        */
+        var videoPlayer = new Vimeo.Player('myVideo');
+
+        videoPlayer.on('play', function(data) {
+            console.log('[play] ', data);
+        });
+
+        videoPlayer.on('stop', function(data) {
+            console.log('[stop] ', data);
+        });
+
+        videoPlayer.on('pause', function(data) {
+            console.log('[pause] ', data);
+        });        
+
+        videoPlayer.on('ended', function(data) {
+            console.log('[ended] ', data);
+        });        
+
+        videoPlayer.getLoop().then(function(loop) {
+            console.log('[loop] ', loop);
+        });
+
+        videoPlayer.getCurrentTime().then(function(seconds) {
+            console.log('[getCurrentTime] ', seconds);
+        });  
+        
+        videoPlayer.getDuration().then(function(duration) {
+            console.log('[getDuration] ', duration);
+        });       
+        
+        videoPlayer.getEnded().then(function(ended) {
+            console.log('[getEnded] ', ended);
+        });   
+        
+        videoPlayer.getPaused().then(function(paused) {
+            console.log('[getPaused] ', paused);
+        });        
+
+        videoPlayer.getVolume().then(function(volume) {
+            console.log('[getVolume] ', volume);
+        });       
+        
+        videoPlayer.getVideoId().then(function(id) {
+            console.log('[getVideoId] ', id);
+        });   
+        
+        videoPlayer.getVideoTitle().then(function(title) {
+            console.log('[getVideoTitle] ', title);
+        });   
+        
+        videoPlayer.ready().then(function() {
+            console.log('[ready] ');
+        });        
+
+        /*
+        var onPlay = function(data) {
+        // `data` is an object containing properties specific to that event
+        };
+        player.on('play', onPlay);        
+        */
+
+        /*
+        player.getAutopause().then(function(autopause) {
+        // `autopause` indicates whether autopause is enabled
+        }).catch(function(error) {
+        switch (error.name) {
+            case 'UnsupportedError':
+            // Autopause isn't supported by the current player or browser
+            break;
+            default:
+            // Some other error occurred
+            break;
+        }
+        });        
+
+        PasswordError	영상은 비밀번호로 보호되어 있습니다.
+        PrivacyError	영상은 비공개입니다.
+        Error	다른 오류가 발생했습니다.        
+
+        player.pause().then(function() {
+        // The video is paused
+        }).catch(function(error) {
+        switch (error.name) {
+            case 'PasswordError':
+                // The video is password-protected
+                break;
+            case 'PrivacyError':
+                // The video is private
+                break;
+            default:
+                // Some other error occurred
+                break;
+        }
+        });        
+        */
+
+    </script>
+
+
+</body>
+</html>
+
+
