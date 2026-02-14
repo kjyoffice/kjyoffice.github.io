@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VimeoAPI</title>
+    <title>VimeoAPI 1</title>
 </head>
 <body>
-    <h1>VimeoAPI</h1>
+    <h1>VimeoAPI 1</h1>
 
     <!--
     https://developer.vimeo.com/player/sdk/basics
@@ -45,6 +45,10 @@
             console.log('[loop] ', loop);
         });
 
+        videoPlayer.on('timeupdate', (data) => {
+            console.log('[timeupdate] ', data, data.seconds);
+        });        
+
         videoPlayer.getCurrentTime().then(function(seconds) {
             console.log('[getCurrentTime] ', seconds);
         });  
@@ -75,7 +79,23 @@
         
         videoPlayer.ready().then(function() {
             console.log('[ready] ');
-        });        
+        });       
+        
+
+        /*
+        videoPlayer.on('progress', function(data) {
+            // 버퍼링 진행상황
+            console.log('[progress] ###', data);
+        });    
+
+        videoPlayer.on('playbackratechange', function(data) {
+            console.log('[playbackratechange] ###', data);
+        }); 
+
+        videoPlayer.on('error', function(data) {
+            console.log('[error] ###', data);
+        });  
+        */        
 
         /*
         var onPlay = function(data) {

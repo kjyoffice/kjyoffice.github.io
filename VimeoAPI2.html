@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VimeoAPI 2</title>
+</head>
+<body>
+    <h1>VimeoAPI 2</h1>
+
+    <div id="myVideo" data-vimeo-id="76979871" data-vimeo-autoplay="false" data-vimeo-loop="false" data-vimeo-width="800"></div>
+
+    <textarea id="serversendseconds" style="width:500px; height:300px;" readonly="readonly"></textarea>
+
+    <script type="text/javascript" src="https://player.vimeo.com/api/player.js"></script>
+    <script type="text/javascript">
+        const videoPlayer = new Vimeo.Player('myVideo');
+      
+        videoPlayer.on('loaded', function(data) {
+            VideoStatusX('loaded', data);
+        });          
+
+        videoPlayer.on('play', function(data) {
+            VideoStatusX('play', data);
+        });
+
+        videoPlayer.on('pause', function(data) {
+            VideoStatusX('pause', data);
+        });  
+        
+        videoPlayer.on('timeupdate', function(data) {
+            VideoStatusX('timeupdate', data);
+        });    
+
+        videoPlayer.on('seeked', function(data) {
+            VideoStatusX('seeked', data);
+        });  
+
+        videoPlayer.on('ended', function(data) {
+            VideoStatusX('ended', data);
+        });  
+
+        videoPlayer.on('volumechange', function(data) {
+            VideoStatusX('volumechange', data);
+        });  
+
+        const VideoStatusX = function(eventName, dataX) {
+            const eventNameUP = eventName.toUpperCase();
+            const serverSec = document.getElementById('serversendseconds');
+
+            if(eventNameUP == 'LOADED') {
+                //console.log('[' + eventNameUP + '] ###', dataX.id);
+                serverSec.value = '';
+            } else if(eventNameUP == 'VOLUMECHANGE') {
+                //console.log('[' + eventNameUP + '] ###', (Math.floor((dataX.volume * 100)) + ' %'), '###', dataX.muted);
+            } else {
+                console.log('[' + eventNameUP + '] ###', (Math.floor((dataX.percent * 100)) + ' %'), '###', (Math.floor(dataX.seconds) + ' / ' + Math.floor(dataX.duration)));
+                serverSec.value += (eventNameUP + '|' + Math.floor(dataX.seconds) + ',');
+            }           
+        };
+
+        // <<< 아래에서 나오는 "초"는 내림하며 소수점 날린 초임 >>>        
+        // 이렇게 해서 매 이벤트마다 시간정보 기록하고 
+        // 약 5초마다 서버로 던지고, 서버는 고대로 저장함
+        //
+        // 이렇게 될거고 
+        // 서버에서! 리스트를 만들어서 이전 초보다 지금의 초 차이가 1초인지 체크
+        // 뭐 이전 초에서 +1 했을때 지금 초랑 같은지 보는거지 뭐
+        // 같지 않다면 그 비어있는 시간의 초를 만드는데 꼬리표를 "시청하지 않음" 형식으로 만듦
+        // 암튼 그래서 전체 초의 리스트를 만듦
+        // 이제 이 전체 초의 리스트에서 "시청하지 않음" 리스트를 빼고 나머지 초를 전체 초와 비교해서 % 계산함!
+
+    </script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
