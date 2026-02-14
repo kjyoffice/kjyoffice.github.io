@@ -70,6 +70,39 @@
         // 암튼 그래서 전체 초의 리스트를 만듦
         // 이제 이 전체 초의 리스트에서 "시청하지 않음" 리스트를 빼고 나머지 초를 전체 초와 비교해서 % 계산함!
 
+        // https://developer.chrome.com/docs/web-platform/page-lifecycle-api?hl=ko#developer-recommendations-for-each-state
+
+
+        // 프롬 GPT
+        // 페이지 이동 전 혹은 새로고침 전 서버 전송을 위해서는 이벤트
+        const sendRemainingData = function() {
+            const data = {
+                rawData: document.getElementById('serversendseconds').value
+            };
+
+            const blob = new Blob(
+                [JSON.stringify(data)],
+                { type: "application/json" }
+            );
+
+            // POST임
+            // 최대 데이터 약 64KB?
+            // https://developer.mozilla.org/ko/docs/Web/API/Navigator/sendBeacon
+            navigator.sendBeacon("/api/video/leave", blob);
+        };
+
+        document.addEventListener("visibilitychange", () => {
+            //console.log(document.visibilityState);
+            // 탭에 포커스를 잃을때 / 페이지 이동일 때 / 새로고침
+            if (document.visibilityState == "hidden") {
+                sendRemainingData();
+            }
+        }); 
+
+        window.addEventListener("beforeunload", () => {
+            sendRemainingData();
+        });   
+
     </script>
 
 
